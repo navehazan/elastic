@@ -14,49 +14,31 @@ var client = new elasticsearch.Client({
 //   console.log("-- Client Health --", resp);
 // });
 
-const createIndex = () => {
-  return client.indices.create({ index: "gov" });
-};
+// const createIndex = () => {
+//   return client.indices.create({ index: "gov" });
+// };
 
-const deleteIndex = () => {
-  return client.indices.delete({ index: "gov" });
-};
+// const deleteIndex = () => {
+//   return client.indices.delete({ index: "gov" });
+// };
 
-const createDoc = () => {
+const createDoc = (index, body) => {
   return client.index({
-    index: "gov",
-    id: "1",
-    type: "constituencies",
-    body: {
-      ConstituencyName: "Ipswich",
-      ConstituencyID: "E14000761",
-      ConstituencyType: "Borough",
-      Electorate: 74499,
-      ValidVotes: 48694,
-    },
+    index,
+    body,
   });
 };
 
-const deleteDoc = () => {
-  return client.delete({
-    index: "gov",
-    id: "1",
-    type: "constituencies",
-  });
+// const deleteDoc = () => {
+//   return client.delete({
+//     index: "gov",
+//     id: "1",
+//     type: "constituencies",
+//   });
+// };
+
+const countDoc = (index) => {
+  return client.count({ index });
 };
 
-const countDoc = () => {
-  return client.count({ index: "gov", type: "constituencies" });
-};
-
-(async () => {
-  // const create = await createDoc();
-  // console.log(create, "create");
-  // const deleted = await deleteDoc();
-  // console.log(deleted, "deleted");
-  // const count = await countDoc();
-  // console.log(count, "count");
-
-})();
-
-module.exports = client;
+module.exports = { createDoc, countDoc };
