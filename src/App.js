@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
-import { TextField } from "@material-ui/core";
+import { TextField, List, ListItem, ListItemText } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 import { throttle } from "lodash";
@@ -35,7 +35,7 @@ const App = () => {
     }
     try {
       const res = await axios.get(`http://localhost:3001/search/${text}`);
-      setPages(res.data)
+      setPages(res.data);
     } catch (e) {
       console.log(e);
     }
