@@ -37,8 +37,19 @@ const createDoc = (index, body) => {
 //   });
 // };
 
+const searchDoc = (index, string) => {
+  return client.search({
+    index,
+    body: {
+      query: {
+        match: { site: string },
+      },
+    },
+  });
+};
+
 const countDoc = (index) => {
   return client.count({ index });
 };
 
-module.exports = { createDoc, countDoc };
+module.exports = { createDoc, countDoc, searchDoc };

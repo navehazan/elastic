@@ -23,11 +23,19 @@ const addPages = async () => {
   return Promise.all(promises);
 };
 
+const searchDoc = async (req, res, next) => {
+  const { string } = req.body;
+  let data = await client.searchDoc("pages", string);
+  data = res.hits.hits.map((hit) => hit._source);
+  res.send(data);
+};
+
 (async () => {
-  const created = await addPages();
-  const count = await client.countDoc("pages");
-  console.log(created)
-  console.log(count)
+  // const created = await addPages();
+  // const count = await client.countDoc("pages");
+  // console.log(created)
+  // console.log(count)
+  // const res = await client.searchDoc("pages", "dr");
 })();
 
-module.exports = client;
+module.exports = { searchDoc };
