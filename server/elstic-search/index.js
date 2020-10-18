@@ -20,9 +20,14 @@ const addPages = async () => {
   const promises = pages.map((page) => {
     return client.createDoc("pages", page);
   });
-  const res = await Promise.all(promises);
-  console.log(res);
+  return Promise.all(promises);
 };
-addPages();
+
+(async () => {
+  const created = await addPages();
+  const count = await client.countDoc("pages");
+  console.log(created)
+  console.log(count)
+})();
 
 module.exports = client;
