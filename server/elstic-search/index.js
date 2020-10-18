@@ -24,9 +24,9 @@ const addPages = async () => {
 };
 
 const searchDoc = async (req, res, next) => {
-  const { string } = req.body;
-  let data = await client.searchDoc("pages", string);
-  data = res.hits.hits.map((hit) => hit._source);
+  const { text } = req.params;
+  let data = await client.searchDoc("pages", text);
+  data = data.hits.hits.map((hit) => hit._source);
   res.send(data);
 };
 
