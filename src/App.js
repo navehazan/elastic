@@ -10,6 +10,7 @@ const useStyles = makeStyles({
   app: {
     display: "flex",
     padding: "20px",
+    flexDirection:"column",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -22,6 +23,7 @@ const App = () => {
 
   useEffect(() => {
     getPages();
+    console.log(pages);
   }, [text]);
 
   const onChange = (event) => {
@@ -41,6 +43,16 @@ const App = () => {
     }
   };
 
+  const getItems = () => {
+    return pages.map((page) => {
+      return (
+        <ListItem button>
+          <ListItemText primary={page.name} />
+        </ListItem>
+      );
+    });
+  };
+
   return (
     <div className={classes.app}>
       <TextField
@@ -49,6 +61,7 @@ const App = () => {
         value={text}
         onChange={onChange}
       />
+      <List component="nav">{getItems()}</List>
     </div>
   );
 };

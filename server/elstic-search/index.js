@@ -16,7 +16,7 @@ const executeSqlAsync = async (query) => {
   return promisify(pool.query).bind(pool)(query);
 };
 const addPages = async () => {
-  const pages = await executeSqlAsync("select * from wsrstage.pages limit 4");
+  const pages = await executeSqlAsync("select * from wsrstage.pages");
   const promises = pages.map((page) => {
     return client.createDoc("pages", page);
   });
